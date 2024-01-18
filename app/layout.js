@@ -11,7 +11,23 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div className='flex flex-col h-screen text-center items-center justify-center md:hidden'>
+          <header className='p-4 text-center shadow-sm'>
+            Central retail in VN
+          </header>
+          <div className='flex-grow  overflow-y-auto p-4'>
+            {children}
+          </div>
+          <footer className='p-4 shadow-sm text-center'>
+            &copy; 2024 ITCare
+          </footer>
+        </div>
+
+        <script
+          type="text/javascript"
+          src="../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+      </body>
     </html>
   )
 }
