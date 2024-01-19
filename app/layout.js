@@ -11,12 +11,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+
       <body className={inter.className}>
-        <div className='flex flex-col h-screen text-center items-center justify-center md:hidden'>
+        <div className='flex flex-col h-screen text-center text-sm font-medium items-center justify-center md:hidden'>
           <header className='p-4 text-center shadow-sm'>
             Central retail in VN
           </header>
-          <div className='flex-grow  overflow-y-auto p-4'>
+          <div className='flex-grow font-medium overflow-y-auto p-4'>
             {children}
           </div>
           <footer className='p-4 shadow-sm text-center'>
