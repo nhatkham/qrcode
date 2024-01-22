@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
 
       <body className={inter.className}>
-        <div className='flex flex-col h-screen text-center text-sm font-medium items-center justify-center md:hidden'>
+        <div className='flex flex-col h-screen text-center text-sm font-medium items-center justify-center'>
           <header className='p-4 text-center shadow-sm'>
             Central retail in VN
           </header>
@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
 
         <script
           type="text/javascript"
-          src="../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"></script>
+          src="../../node_modules/tw-elements/dist/js/tw-elements.umd.min.js"></script>
       </body>
     </html>
   )

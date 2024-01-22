@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import { Schema, mongoose } from "mongoose";
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
     username: {
         type: String,
         required: true,
@@ -36,25 +36,33 @@ const npsSchema = new mongoose.Schema({
     bu: {
         type: String,
         required: true,
-        unique: true,
-        min: 2,
+        min: 1,
         max: 20,
     },
     question: {
         type: String,
     },
     score: {
-        type: Number,
+        type: String,
         required: true,
-        min: 1,
+        min: 0,
+        max: 10,
     },
-    reply: {
+    comment: {
         type: String,
     },
     agent: {
+        type: String,
+    },
+    IP: {
         type: String,
     }
 
 },
     { timestamps: true }
 )
+
+const User = mongoose.models.User || mongoose.model("User", userSchema);
+const NPS = mongoose.models.NPS || mongoose.model("NPS", npsSchema);
+
+export { User, NPS };
