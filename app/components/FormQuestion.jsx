@@ -16,10 +16,10 @@ export default function formQuestion(props) {
   const [newNPS, setNewNPS] = useState({
     bu: props.nps.bu,
     question: props.nps.question,
-    score: null,
+    score: props.nps.score || "",
     comment: props.nps.comment || "",
-    agent: props.nps.agent,
-    IP: props.nps.IP,
+    agent: props.nps.agent.userAgent,
+    IP: props.nps.IP.ipAddress,
   });
 
   const router = useRouter();
@@ -39,10 +39,13 @@ export default function formQuestion(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(newNPS);
-
     try {
-      const res = await fetch(`http://localhost:3000/api/nps`, {
+      // Make sure newNPS is defined and includes the bu property
+      if (!newNPS || !newNPS.bu) {
+        throw new Error("Invalid newNPS object");
+      }
+
+      const res = await fetch(`http://localhost:3000/api/nps/`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -55,9 +58,9 @@ export default function formQuestion(props) {
       }
 
       router.refresh();
-      router.push("/app/nk/more/");
+      router.push("http://localhost:3000/nk/more/");
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -116,7 +119,7 @@ export default function formQuestion(props) {
         </div>
 
         <button
-          type="button"
+          type="submit"
           /* disabled={!props.nps.comment} */
           onClick={handleSubmit}
           className="inline-block text-xs rounded-full bg-primary px-6 pb-2 pt-2.5 uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"

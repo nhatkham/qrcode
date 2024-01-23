@@ -35,7 +35,6 @@ const userSchema = new Schema({
 const npsSchema = new mongoose.Schema({
     bu: {
         type: String,
-        required: true,
         min: 1,
         max: 20,
     },
@@ -44,7 +43,6 @@ const npsSchema = new mongoose.Schema({
     },
     score: {
         type: String,
-        required: true,
         min: 0,
         max: 10,
     },

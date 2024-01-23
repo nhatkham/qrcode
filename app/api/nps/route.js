@@ -3,11 +3,22 @@ import { NPS } from "@/app/libs/models";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-  const { bu, question, score, comment, agent, IP } = await request.json();
-  await connectMongoDB();
-  await NPS.create({ bu, question, score, comment, agent, IP });
-  return NextResponse.json({ message: "Survey Created" }, { status: 201 });
+  try {
+    const { bu, question, score, comment, agent, IP } = await request.json();
+    console.log(request.json());
+    
+    await connectMongoDB();
+    await NPS.create({ bu, question, score, comment, agent, IP });
+
+    return NextResponse.json({ message: "Survey Created" }, { status: 201 });
+  } catch (error) {
+    console.error("Error creating survey:", error);
+    return NextResponse.json({ error: "Failed to create survey" }, { status: 500 });
+  }
 }
+
+// Rest of your code...
+
 
 export async function GET() {
   await connectMongoDB();
